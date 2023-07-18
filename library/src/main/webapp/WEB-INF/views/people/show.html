@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.og">
+<head>
+<meta charset="ISO-8859-1">
+<title>Customer's page</title>
+</head>
+<body>
+	<p th:text="${person.getName() + ', ' + person.getYearOfBirth()}">VALUE</p>
+	
+	<div th:if="${books.isEmpty()}">
+		<p>This customer didn't take books</p>
+		<hr/>
+	</div>
+	
+	<div th:if="${!books.isEmpty()}">
+		<hr/>
+		<b>Books:</b>
+		<br/>
+		<table th:each="book : ${books}">
+			<tr th:text="${book.getBookName() + ', ' + book.getAuthor() + ', ' + book.getYearOfPrint()}"></tr>
+		</table>
+	</div>
+	
+	<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+		<input type="submit" value="Edit"/>
+	</form>
+	
+	<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+	    <input type="submit" value="Delete"/>
+	</form>
+	<br/>
+	<hr/>
+	<a th:href="@{/people}">------CUSTOMERS------</a>
+
+</body>
+</html>
